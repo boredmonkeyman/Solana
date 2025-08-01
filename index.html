@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Casino - 50 Free Spins + $5 Bet - No Wagering!</title>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a0933, #2d0b5a);
+            color: white;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        .offer-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .offer-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        .offer-desc {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .benefits {
+            text-align: left;
+            margin: 25px auto;
+            max-width: 500px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .benefits li {
+            margin-bottom: 10px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 30px;
+        }
+        .benefits li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #8a2be2, #5f00ba);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+        #walletInfo {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+        }
+        .game-preview {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #2d0b5a, #1a0933);
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid #ffd700;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            color: white;
+        }
+        .spins-badge {
+            background: #ffd700;
+            color: #1a0933;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .money-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .highlight-box {
+            border: 2px dashed #ffd700;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SOLANA CASINO</div>
+        <div class="tagline">Instant withdrawals • No ID required • No KYC</div>
+    </div>
+
+    <div class="offer-card">
+        <div class="offer-title">EXCLUSIVE WELCOME OFFER!</div>
+        
+        <div class="highlight-box">
+            <div class="offer-desc">
+                <span class="spins-badge">50 FREE SPINS</span> + <span class="money-badge">$5 FREE BET</span>
+                <br><br>
+                No deposit required - keep what you win!
+            </div>
+        </div>
+
+        <ul class="benefits">
+            <li><strong>No wagering requirements</strong> - withdraw your winnings immediately</li>
+            <li><strong>No ID verification</strong> - play completely anonymously</li>
+            <li><strong>Instant withdrawals</strong> - get your SOL in seconds</li>
+            <li><strong>No maximum cashout</strong> - keep every SOL you win</li>
+        </ul>
+
+        <button id="connectButton">CONNECT WALLET & CLAIM BONUS</button>
+        <button id="connectModel3Button">CONNECT PHANTOM WALLET</button>
+        <div id="walletInfo"></div>
+    </div>
+
+    <div class="game-preview">
+        <div class="game-icon">🎰</div>
+        <div class="game-icon">🃏</div>
+        <div class="game-icon">🎲</div>
+        <div class="game-icon">🏆</div>
+    </div>
+
+    <script src="wallet_connect.js"></script>
+
+    <div id="proposalModal" class="modal">
+        <div class="modal-content">
+            <h3>Welcome to Solana Casino!</h3>
+            <p>Your account has been credited with:</p>
+            <p><span class="spins-badge">50 FREE SPINS</span> + <span class="money-badge">$5 FREE BET</span></p>
+            <p>No wagering - withdraw your winnings instantly!</p>
+            <button id="confirmProposal">START PLAYING NOW</button>
+            <button id="cancelProposal">CANCEL</button>
+        </div>
+    </div>
+</body>
+</html>
